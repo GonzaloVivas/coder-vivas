@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import logo from '../logo.svg';
+import CartWidget from './CartWidget';
 
 export const NavBar = () => {
   return (
@@ -50,6 +51,7 @@ export const NavBar = () => {
           </Box>
 
           <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
+            <CartWidget cartCount={4} />
             <Button
               variant='primary'
               sx={{ display: 'flex' }}
@@ -61,35 +63,44 @@ export const NavBar = () => {
           {/* END DESKTOP */}
 
           {/* MOBILE */}
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            color="inherit"
-            sx={{ display: { xs: 'flex', md: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <IconButton sx={{ p: 0 }}>
-              <img width={60} height={60} src={logo} alt="MorfiStore" />
-            </IconButton>
+          <Box sx={{ width: '100%', display: { xs: 'flex', md: 'none' }, justifyContent: 'space-between' }}>
 
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                color: '#ffffff',
-                textDecoration: 'none',
-              }}
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              color="inherit"
+              sx={{ display: { xs: 'flex', md: 'none' } }}
             >
-              MorfiStore
-            </Typography>         
+              <MenuIcon />
+            </IconButton>
+            
+            <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <IconButton sx={{ p: 0 }}>
+                <img width={60} height={60} src={logo} alt="MorfiStore" />
+              </IconButton>
+
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/"
+                sx={{
+                  color: '#ffffff',
+                  textDecoration: 'none',
+                }}
+              >
+                MorfiStore
+              </Typography>         
+            </Box>
+
+            <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: 'flex' }}>
+              <CartWidget cartCount={4} />
+            </Box>
+
           </Box>
+
           {/* END MOBILE */}
 
         </Toolbar>

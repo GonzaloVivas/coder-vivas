@@ -8,7 +8,9 @@ export const darkTheme = createTheme({
       default: grey[900]
     },
     primary: {
-      main: '#7d38d1'
+      main: '#7d38d1',
+      dark: '#4a148c',
+      light: '#9f7dc9',
     },
     secondary: {
       main: '#19857b'
@@ -24,6 +26,14 @@ export const darkTheme = createTheme({
             backgroundColor: '#4a148c'
           },
         },
+        notBg: {
+          backgroundColor: 'transparent',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#4a148c',
+            border: 'none',
+          },
+        }
       },
     },
   }

@@ -3,6 +3,7 @@ import { NavBar } from './components/NavBar';
 import { darkTheme } from './themes/dark-theme';
 
 import './App.css';
+import ItemListContainer from './components/ItemListContainer';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline>
         <NavBar />
+        <ItemListContainer />
       </CssBaseline>
     </ThemeProvider>
   );
