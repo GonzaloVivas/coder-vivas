@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { AppBar, Box, Button, Container, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-import logo from '../logo.svg';
 import CartWidget from './CartWidget';
+import logo from '../logo.svg';
 
 export const NavBar = () => {
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
   return (
     <AppBar position='sticky' elevation={0} background='#0d47a1'>
       <Container maxWidth='xl'>
@@ -72,9 +75,43 @@ export const NavBar = () => {
               aria-haspopup="true"
               color="inherit"
               sx={{ display: { xs: 'flex', md: 'none' } }}
+              onClick={ () => setIsDrawerOpen(!isDrawerOpen) }
             >
               <MenuIcon />
             </IconButton>
+
+            <Drawer
+              open={ isDrawerOpen }
+              onClose={ () => setIsDrawerOpen(false) }
+            >
+              <List>
+                  <ListItem>
+                  <ListItemButton sx={{ paddingX: '50px' }}>
+                      <ListItemText sx={{ textAlign: 'center' }} primary='COMIDA' />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemButton>
+                      <ListItemText sx={{ textAlign: 'center' }} primary='BEBIDA' />
+                    </ListItemButton>
+                  </ListItem>
+                  <ListItem>
+                    <ListItemButton>
+                      <ListItemText sx={{ textAlign: 'center' }} primary='ACCESORIOS' />
+                    </ListItemButton>
+                  </ListItem>
+              </List>
+              <Divider />
+              <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <Button
+                  variant='primary'
+                  sx={{ display: 'flex' }}
+                  startIcon={<AccountCircleIcon />}
+                >
+                  Login
+                </Button>
+              </Box>
+            </Drawer>
             
             <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
               <IconButton sx={{ p: 0 }}>
