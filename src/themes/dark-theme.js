@@ -25,6 +25,7 @@ export const darkTheme = createTheme({
           '&:hover': {
             backgroundColor: '#4a148c'
           },
+          color: '#ffffff'
         },
         notBg: {
           backgroundColor: 'transparent',
@@ -33,8 +34,40 @@ export const darkTheme = createTheme({
             backgroundColor: '#4a148c',
             border: 'none',
           },
-        }
+        },
+        sizeSmall: {
+          backgroundColor: '#7d38d1',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#4a148c',
+          }
+        },
       },
     },
+    MuiFab: {
+      styleOverrides: {
+        primary: {
+          backgroundColor: '#7d38d1',
+          color: '#ffffff',
+          boxShadow: 'unset',
+          '&:hover': {
+            backgroundColor: '#4a148c',
+          },
+        },
+      }
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: grey[800],
+          borderRadius: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          textAlign: 'center',
+          width: '300px'
+        }
+      }
+    }
   }
 });

@@ -1,21 +1,29 @@
-import React from 'react'
-import { Box, useTheme } from '@mui/material'
+import React from 'react';
+import { Box } from '@mui/material';
+import ItemCount from './ItemCount';
 
 export default function ItemListContainer() {
 
-  const theme = useTheme()
+  const onAdd = (count) => {
+    if (count > 0) {
+      console.log('Agregado al carrito!');
+      alert('Agregado al carrito!');
+    } else {
+      console.log('Error al agregar al carrito: la cantidad no puede ser 0')
+      alert('Error al agregar al carrito: la cantidad no puede ser 0')
+    }
+  }
 
   return (
     <Box
       sx={{
+        marginTop: '40px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '300px',
-        color: theme.palette.primary.light
       }}
     >
-      <h2>{`<ItemListContainer />`}</h2>
+      <ItemCount stock={5} initial={1} onAdd={onAdd} />
     </Box>
   )
 }
