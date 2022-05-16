@@ -1,8 +1,13 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, CircularProgress } from '@mui/material';
+import ItemList from './ItemList';
 import ItemCount from './ItemCount';
+import mockItems from '../mocks/itemMock'
 
 export default function ItemListContainer() {
+
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const onAdd = (count) => {
     if (count > 0) {
@@ -14,16 +19,55 @@ export default function ItemListContainer() {
     }
   }
 
+  const fetchItems = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(mockItems)
+    }, 2000);
+  });
+
+  useEffect(() => {
+    fetchItems
+      .then(res => setItems(res))
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false))
+  }, [])
+
   return (
-    <Box
-      sx={{
-        marginTop: '40px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <ItemCount stock={5} initial={1} onAdd={onAdd} />
-    </Box>
+    <>
+      {
+        isLoading ? 
+        (
+          <Box
+            sx={{
+              marginTop: '40px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <CircularProgress
+              variant="indeterminate"
+              size={40}
+              thickness={4}
+              value={100}
+            />
+          </Box>
+        )
+        : (
+            <ItemList items={items} />
+        )
+      }
+
+      <Box
+        sx={{
+          marginTop: '40px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <ItemCount stock={5} initial={1} onAdd={onAdd} />
+      </Box>
+    </>
   )
 }

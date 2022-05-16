@@ -61,9 +61,6 @@ export const darkTheme = createTheme({
         root: {
           backgroundColor: grey[800],
           borderRadius: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
           textAlign: 'center',
           width: '300px'
         }

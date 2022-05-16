@@ -11,7 +11,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
       setItemCount( Number(itemCount) + 1 );
     }
   }
-  
+
   const removeItem = () => {
     if (itemCount > 0) {
       setItemCount( Number(itemCount) - 1 );

@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import { NavBar } from './components/NavBar';
 import { darkTheme } from './themes/dark-theme';
 
@@ -11,7 +11,9 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline>
         <NavBar />
-        <ItemListContainer />
+        <Container maxWidth='xl'>
+          <ItemListContainer />
+        </Container>
       </CssBaseline>
     </ThemeProvider>
   );
