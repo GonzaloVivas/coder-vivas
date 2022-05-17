@@ -1,30 +1,37 @@
 import { useEffect, useState } from 'react';
 import { Box, CircularProgress } from '@mui/material';
-import ItemList from './ItemList';
-import mockItems from '../mocks/itemsMock'
+import ItemDetail from './ItemDetail';
+import mockItems from '../mocks/itemsMock';
 
-export default function ItemListContainer() {
+export default function ItemDetailContainer() {
 
-  const [items, setItems] = useState([]);
+  const [item, setItem] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
-  const fetchItems = new Promise((resolve, reject) => {
+  const getItem = new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(mockItems)
+      resolve(mockItems.find( item => item.id === 1 ))
     }, 2000);
   });
 
   useEffect(() => {
-    fetchItems
-      .then(res => setItems(res))
+    getItem
+      .then(res => setItem(res))
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false))
   }, [])
 
   return (
-    <>
+    <Box
+      sx={{
+        marginTop: '40px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       {
-        isLoading ? 
+        isLoading ?
         (
           <Box
             sx={{
@@ -43,9 +50,9 @@ export default function ItemListContainer() {
           </Box>
         )
         : (
-            <ItemList items={items} />
+          <ItemDetail item={ item } />
         )
       }
-    </>
+    </Box>
   )
 }

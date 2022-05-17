@@ -42,6 +42,16 @@ export const darkTheme = createTheme({
             backgroundColor: '#4a148c',
           }
         },
+        sizeLarge: {
+          paddingTop: '18px',
+          paddingBottom: '18px',
+          minWidth: '200px',
+          backgroundColor: '#7d38d1',
+          color: '#ffffff',
+          '&:hover': {
+            backgroundColor: '#4a148c',
+          }
+        },
       },
     },
     MuiFab: {

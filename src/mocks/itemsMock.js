@@ -2,7 +2,7 @@ const mockItems = [
   {
     id: 1,
     title: 'Milanesa con papas fritas',
-    description: 'El mejor almuerzo para un lunes',
+    description: 'La milanesa es uno de los platos más populares en los que la guarnición son las patatas fritas, la comida que más gusta al ser humano de acuerdo con un estudio científico llevado a cabo por la revista científica Scientific Reports. Te ofrecemos el mejor almuerzo para cualquier día de la semana.',
     price: 450,
     pictureUrl: 'https://www.losandes.com.ar/resizer/4kfgfj4QAOn12bg72KggLPKUCHw=/1200x630/smart/cloudfront-us-east-1.images.arcpublishing.com/grupoclarin/GJRGCMJWGVSDEOJYMVSDKNZXMU.jpg',
     stock: 10
