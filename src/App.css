@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-link {
+  margin-bottom: 2px;
+  margin-top: 2px;
+  color: white;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 50px;
+}
+
+.nav-link.active {
+  background-color: #7d38d1;
+}
+
+.button-link {
+  text-decoration: none;
+  background-color: #7d38d1;
+  border-radius: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 6px 16px;
+}
+
+.button-link:hover {
+  background-color: #4a148c;
+}

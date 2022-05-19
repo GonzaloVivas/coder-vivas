@@ -6,6 +6,22 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import CartWidget from './CartWidget';
 import logo from '../logo.svg';
+import { Link, NavLink } from 'react-router-dom';
+
+const categories = [
+  {
+    slug: 'comida',
+    label: 'Comida'
+  },
+  {
+    slug: 'bebida',
+    label: 'Bebida'
+  },
+  {
+    slug: 'accesorios',
+    label: 'Accesorios'
+  },
+];
 
 export const NavBar = () => {
 
@@ -17,40 +33,43 @@ export const NavBar = () => {
         <Toolbar>
           
           {/* Desktop  */}
-          <IconButton sx={{ p: 0, display: { xs: 'none', md: 'flex' } }}>
-            <img width={60} height={60} src={logo} alt="MorfiStore" />
-          </IconButton>
-
-          <Typography
-            variant="h4"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Link to='/' style={{
+              display: 'flex',
+              alignItems: 'center',
               textDecoration: 'none',
-              color: '#ffffff'
-            }}
-          >
-            MorfiStore
-          </Typography>
+              color: '#ffffff',
+            }}>
+              <IconButton sx={{ p: 0, display: { xs: 'none', md: 'flex' } }}>
+                <img width={60} height={60} src={logo} alt="MorfiStore" />
+              </IconButton>
+              <Typography
+                variant="h4"
+                noWrap
+                href="/"
+                sx={{
+                  display: { xs: 'none', md: 'flex' },
+                  textDecoration: 'none',
+                  color: '#ffffff'
+                }}
+              >
+                MorfiStore
+              </Typography>
+            </Link>
+          </Box>
 
           <Box sx={{ flexGrow: 1, justifyContent: 'center', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Comida
-            </Button>
-            <Button
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Bebida
-            </Button>
-            <Button
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              Accesorios
-            </Button>
+            {
+              categories.map( ({ slug, label }) => (
+                <NavLink
+                  to={ `category/${slug}` }
+                  key={ label }
+                  className='nav-link'
+                >
+                  { label }
+                </NavLink>
+              ))
+            }
           </Box>
 
           <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
@@ -85,21 +104,22 @@ export const NavBar = () => {
               onClose={ () => setIsDrawerOpen(false) }
             >
               <List>
-                  <ListItem>
-                  <ListItemButton sx={{ paddingX: '50px' }}>
-                      <ListItemText sx={{ textAlign: 'center' }} primary='COMIDA' />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemButton>
-                      <ListItemText sx={{ textAlign: 'center' }} primary='BEBIDA' />
-                    </ListItemButton>
-                  </ListItem>
-                  <ListItem>
-                    <ListItemButton>
-                      <ListItemText sx={{ textAlign: 'center' }} primary='ACCESORIOS' />
-                    </ListItemButton>
-                  </ListItem>
+                {
+                  categories.map(({ slug, label }) => (
+                    <Link
+                      to={`category/${slug}`}
+                      key={label}
+                      className='nav-link'
+                      onClick={ () => setIsDrawerOpen(false) }
+                    >
+                      <ListItem>
+                        <ListItemButton sx={{ paddingX: '50px' }}>
+                          <ListItemText sx={{ textAlign: 'center' }} primary={ label } />
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
+                  ))
+                }
               </List>
               <Divider />
               <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
@@ -114,22 +134,28 @@ export const NavBar = () => {
             </Drawer>
             
             <Box sx={{ display: 'flex', flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <IconButton sx={{ p: 0 }}>
-                <img width={60} height={60} src={logo} alt="MorfiStore" />
-              </IconButton>
+              <Link to='/' style={{
+                display: 'flex',
+                alignItems: 'center',
+                textDecoration: 'none',
+                color: '#ffffff',
+              }}>
+                <IconButton sx={{ p: 0 }}>
+                  <img width={60} height={60} src={logo} alt="MorfiStore" />
+                </IconButton>
 
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                  color: '#ffffff',
-                  textDecoration: 'none',
-                }}
-              >
-                MorfiStore
-              </Typography>         
+                <Typography
+                  variant="h6"
+                  noWrap
+                  href="/"
+                  sx={{
+                    color: '#ffffff',
+                    textDecoration: 'none',
+                  }}
+                >
+                  MorfiStore
+                </Typography>         
+              </Link>
             </Box>
 
             <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: 'flex' }}>

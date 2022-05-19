@@ -1,8 +1,9 @@
-import { Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Link } from 'react-router-dom';
+import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 
 const Item = ({ item }) => {
 
-  const { title, description, price, pictureUrl, stock} = item;
+  const { id, title, shortDescription, price, pictureUrl, stock} = item;
 
   return (
     <Card elevation={0}>
@@ -19,7 +20,7 @@ const Item = ({ item }) => {
             { title }
           </Typography>
           <Typography variant='body1'>
-            { description }
+            { shortDescription }
           </Typography>
         </Box>
 
@@ -27,12 +28,13 @@ const Item = ({ item }) => {
           <Typography variant='h5'>
             $ {price}
           </Typography>
-          <Button
-            variant='primary'
-            size='small'
+          
+          <Link
+            to={`/item/${id}`}
+            className='button-link'
           >
             Ver detalle del producto
-          </Button>
+          </Link>
 
           <Typography variant='body2'>
             Stock disponible: { stock }
