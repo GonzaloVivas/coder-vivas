@@ -1,10 +1,12 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import { NavBar } from './components/NavBar';
-import { darkTheme } from './themes/dark-theme';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import NotFound from './components/NotFound';
+import { darkTheme } from './themes/dark-theme';
 import './App.css';
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
                 <Route path='/' element={ <ItemListContainer />}/>
                 <Route path='/category/:category' element={ <ItemListContainer />}/>
                 <Route path='/item/:id' element={ <ItemDetailContainer />}/>
+                <Route path='/cart' element={ <Cart />}/>
+                <Route path='/checkout' element={ <Checkout />}/>
                 <Route path='/*' element={ <NotFound /> }/>
               </Routes>
           </Container>

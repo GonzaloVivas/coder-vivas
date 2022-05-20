@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import ItemCount from "./ItemCount";
 
 export default function ItemDetail({ item }) {
   
+  const [itemInCart, setItemInCart] = useState(null);
+
   const onAdd = (count) => {
     if (count > 0) {
-      console.log('Agregado al carrito!');
-      alert('Agregado al carrito!');
+      setItemInCart({...item, quantity: count});
+      alert(`Agregado al carrito! - ${title} - ${count} unidad/es`);
     } else {
       console.log('Error al agregar al carrito: la cantidad no puede ser 0')
       alert('Error al agregar al carrito: la cantidad no puede ser 0')
@@ -65,7 +68,7 @@ export default function ItemDetail({ item }) {
         <Typography variant='body1'>{ description }</Typography>
         <Typography variant='h4'>$ { price }</Typography>
 
-        <ItemCount stock={ stock } initial={ 1 } onAdd={ onAdd } />
+        <ItemCount stock={stock} initial={1} onAdd={onAdd} itemInCart={ itemInCart } />
 
       </Box>
     </Box>
