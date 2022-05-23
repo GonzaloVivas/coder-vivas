@@ -58,7 +58,9 @@ export const CartProvider = ({ children }) => {
   }
 
   const getCartFromLocalStorage = () => {
-    setCart(JSON.parse(localStorage.getItem('cart')));
+    if (localStorage.getItem('cart')) {
+      setCart(JSON.parse(localStorage.getItem('cart')));
+    }
   }
 
   const setCartInLocalStorage = ( cart ) => {
