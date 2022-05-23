@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Box, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import ItemCount from "./ItemCount";
+import { CartContext } from "../context/cart/CartContext";
 
 export default function ItemDetail({ item }) {
   
-  const [itemInCart, setItemInCart] = useState(null);
+  const { addItem, quantityInCart, removeItem } = useContext(CartContext);
 
   const onAdd = (count) => {
     if (count > 0) {
-      setItemInCart({...item, quantity: count});
-      alert(`Agregado al carrito! - ${title} - ${count} unidad/es`);
+      addItem({ ...item, quantity: count });
     } else {
       console.log('Error al agregar al carrito: la cantidad no puede ser 0')
       alert('Error al agregar al carrito: la cantidad no puede ser 0')
     }
   }
 
-  const { title, description, pictureUrl, price, stock } = item
+  const { id, title, description, pictureUrl, price, stock } = item
 
   return (
     <Box 
@@ -30,7 +30,7 @@ export default function ItemDetail({ item }) {
         gap: 2,
         height: {
           xs: 'auto',
-          md: '500px'
+          md: '600px'
         },
         flexDirection: {
           xs: 'column',
@@ -68,7 +68,13 @@ export default function ItemDetail({ item }) {
         <Typography variant='body1'>{ description }</Typography>
         <Typography variant='h4'>$ { price }</Typography>
 
-        <ItemCount stock={stock} initial={1} onAdd={onAdd} itemInCart={ itemInCart } />
+        <ItemCount
+          stock={stock}
+          initial={1}
+          onAdd={onAdd}
+          quantityInCart={ quantityInCart(id) }
+          removeItemFromCart={ () => removeItem(id) }
+        />
 
       </Box>
     </Box>

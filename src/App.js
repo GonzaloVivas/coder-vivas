@@ -8,6 +8,7 @@ import Checkout from './components/Checkout';
 import NotFound from './components/NotFound';
 import { darkTheme } from './themes/dark-theme';
 import './App.css';
+import { CartProvider } from './context/cart/CartContext';
 
 function App() {
 
@@ -15,17 +16,23 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline>
         <BrowserRouter>
-          <NavBar />
-          <Container maxWidth='xl'>
-              <Routes>
-                <Route path='/' element={ <ItemListContainer />}/>
-                <Route path='/category/:category' element={ <ItemListContainer />}/>
-                <Route path='/item/:id' element={ <ItemDetailContainer />}/>
-                <Route path='/cart' element={ <Cart />}/>
-                <Route path='/checkout' element={ <Checkout />}/>
-                <Route path='/*' element={ <NotFound /> }/>
-              </Routes>
-          </Container>
+          
+          <CartProvider>
+
+            <NavBar />
+            <Container maxWidth='xl'>
+                <Routes>
+                  <Route path='/' element={ <ItemListContainer />}/>
+                  <Route path='/category/:category' element={ <ItemListContainer />}/>
+                  <Route path='/item/:id' element={ <ItemDetailContainer />}/>
+                  <Route path='/cart' element={ <Cart />}/>
+                  <Route path='/checkout' element={ <Checkout />}/>
+                  <Route path='/*' element={ <NotFound /> }/>
+                </Routes>
+            </Container>
+
+          </CartProvider>
+          
         </BrowserRouter>
       </CssBaseline>
     </ThemeProvider>

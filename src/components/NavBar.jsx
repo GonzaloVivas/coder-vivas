@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { AppBar, Box, Button, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CartWidget from './CartWidget';
 import logo from '../logo.svg';
 import { Link, NavLink } from 'react-router-dom';
+import { CartContext } from '../context/cart/CartContext';
 
 const categories = [
   {
@@ -26,6 +27,8 @@ const categories = [
 export const NavBar = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const { cart } = useContext(CartContext)
 
   return (
     <AppBar position='sticky' elevation={0} background='#0d47a1'>
@@ -74,7 +77,7 @@ export const NavBar = () => {
 
           <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
             <Link to='/cart'>
-              <CartWidget cartCount={4} />
+              <CartWidget cartCount={ cart.length } />
             </Link>
             <Button
               variant='primary'
@@ -162,7 +165,7 @@ export const NavBar = () => {
 
             <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: 'flex' }}>
               <Link to='/cart' style={{ display: 'flex' }}>
-                <CartWidget cartCount={4} />
+                <CartWidget cartCount={ cart.length } />
               </Link>
             </Box>
 
