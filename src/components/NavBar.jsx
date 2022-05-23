@@ -73,7 +73,9 @@ export const NavBar = () => {
           </Box>
 
           <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
-            <CartWidget cartCount={4} />
+            <Link to='/cart'>
+              <CartWidget cartCount={4} />
+            </Link>
             <Button
               variant='primary'
               sx={{ display: 'flex' }}
@@ -159,7 +161,9 @@ export const NavBar = () => {
             </Box>
 
             <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: 'flex' }}>
-              <CartWidget cartCount={4} />
+              <Link to='/cart' style={{ display: 'flex' }}>
+                <CartWidget cartCount={4} />
+              </Link>
             </Box>
 
           </Box>
