@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { Box, Button, Fab, Typography } from '@mui/material';
 
-export default function ItemCount({ stock, initial, onAdd, quantityInCart, removeItemFromCart }) {
+export default function ItemCount({ stock, initial, onAdd }) {
 
   const [itemCount, setItemCount] = useState(initial)
 
@@ -60,60 +59,6 @@ export default function ItemCount({ stock, initial, onAdd, quantityInCart, remov
           </Button>
         </Box>
       </Box>
-
-      {
-        Boolean(quantityInCart) && (
-          <Box
-            sx={{
-              display: 'flex',
-              marginTop: '20px',
-              flexDirection: 'column',
-              padding: '10px 20px',
-              borderRadius: '20px',
-              flexGrow: 1,
-              alignItems: 'center',
-              marginBottom: '12px',
-              color: '#fff',
-              backgroundColor: '#9f7dc9'
-            }}
-          >
-            <Typography variant='body1'>Tienes { quantityInCart } unidad/es de este producto en el carrito</Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '10px'
-              }}
-            >
-              <Link
-                to='/cart'
-                className='button-link'
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: '6px 16px'
-                }}
-              >
-                Ir al carrito
-              </Link>
-              <Button
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: '6px 16px',
-                  color: '#ffffff',
-                  fontSize: '0.700rem'
-                }}
-                onClick={removeItemFromCart}
-              >
-                Eliminar del carrito
-              </Button>
-            </Box>
-          </Box>
-        )
-      }
-
     </>
   )
 }
