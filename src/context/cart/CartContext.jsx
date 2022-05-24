@@ -34,11 +34,45 @@ export const CartProvider = ({ children }) => {
     setCartInLocalStorage(newCart);
   }
 
+  const increaseItemQuantity = ({ id }) => {
+    let newCart = [];
+    newCart = cart.reduce((acc, _item) => {
+      if(id !== _item.id) {
+        return acc.concat(_item);
+      } else {
+        return acc.concat({ ..._item, quantity: _item.quantity + 1});
+      }
+    }, []);
+    setCart(newCart);
+    setCartInLocalStorage(newCart);
+  }
+
   const removeItem = ( id ) => {
     const newCart = cart.filter( _item => _item.id !== id );
     setCart(newCart);
     setCartInLocalStorage(newCart);
   }
+
+  const decreaseItemQuantity = ({ id, quantity }) => {
+
+    if (quantity === 1) {
+      removeItem(id);
+      return;
+    }
+
+    let newCart = [];
+    newCart = cart.reduce((acc, _item) => {
+      if (id !== _item.id) {
+        return acc.concat(_item);
+      } else {
+        return acc.concat({ ..._item, quantity: _item.quantity - 1 });
+      }
+    }, []);
+    setCart(newCart);
+    setCartInLocalStorage(newCart);
+
+  }
+
 
   const cartClear = () => {
     setCart([])
@@ -55,6 +89,12 @@ export const CartProvider = ({ children }) => {
       return item.quantity;
     }
     return 0;
+  }
+
+  const totalInCart = () => {
+    return cart.reduce( (acc, item) => {
+      return acc = acc + item.quantity
+    }, 0)
   }
 
   const getCartFromLocalStorage = () => {
@@ -74,6 +114,9 @@ export const CartProvider = ({ children }) => {
       removeItem,
       cartClear,
       quantityInCart,
+      totalInCart,
+      increaseItemQuantity,
+      decreaseItemQuantity
     }}>
       { children }
     </CartContext.Provider>

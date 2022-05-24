@@ -28,7 +28,7 @@ export const NavBar = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const { cart } = useContext(CartContext)
+  const { totalInCart } = useContext(CartContext)
 
   return (
     <AppBar position='sticky' elevation={0} background='#0d47a1'>
@@ -77,7 +77,7 @@ export const NavBar = () => {
 
           <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
             <Link to='/cart'>
-              <CartWidget cartCount={ cart.length } />
+              <CartWidget cartCount={ totalInCart() } />
             </Link>
             <Button
               variant='primary'
@@ -165,7 +165,7 @@ export const NavBar = () => {
 
             <Box sx={{ justifyContent: 'flex-end', alignContent: 'center', gap: 4, display: 'flex' }}>
               <Link to='/cart' style={{ display: 'flex' }}>
-                <CartWidget cartCount={ cart.length } />
+                <CartWidget cartCount={ totalInCart() } />
               </Link>
             </Box>
 

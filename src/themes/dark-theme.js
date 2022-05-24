@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { grey } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 
 export const darkTheme = createTheme({
   palette: {
@@ -62,6 +62,14 @@ export const darkTheme = createTheme({
           boxShadow: 'unset',
           '&:hover': {
             backgroundColor: '#4a148c',
+          },
+        },
+        danger: {
+          backgroundColor: red[600],
+          color: '#ffffff',
+          boxShadow: 'unset',
+          '&:hover': {
+            backgroundColor: red[900],
           },
         },
       }
