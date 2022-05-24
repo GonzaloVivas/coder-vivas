@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import { Box } from "@mui/material";
-import CartDetail from "./CartDetail";
+import { CartContext } from "../context/cart/CartContext";
+import CartDetailTable from "./CartDetailTable";
+import CartEmpty from "./CartEmpty";
 
 export default function Cart() {
+
+  const { cart, totalInCart } = useContext(CartContext);
 
   return (
     <Box
@@ -13,7 +18,17 @@ export default function Cart() {
         gap: 2,
       }}
     >
-      <CartDetail />
+      {
+        Boolean(cart.length) ? (
+
+          <CartDetailTable cart={cart} totalInCart={totalInCart()} />
+
+        ) : (
+
+          <CartEmpty />
+
+        )
+      }
     </Box>
   )
 }
