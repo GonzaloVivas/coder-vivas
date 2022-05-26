@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { Box, CircularProgress } from '@mui/material';
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import ItemList from './ItemList';
-import mockItems from '../mocks/itemsMock'
 
 export default function ItemListContainer() {
 
@@ -11,23 +11,28 @@ export default function ItemListContainer() {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
-  const fetchItems = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(() => {
-        if (category) {
-          return mockItems.filter( item => item.category === category );
-        }
-        return  mockItems;
-      })
-    }, 2000);
-  });
-
   useEffect(() => {
+
     setIsLoading(true);
-    fetchItems
-      .then(res => setItems(res))
+    const db = getFirestore();
+    let productsCollection;
+
+    if (category) {
+      productsCollection = query(
+        collection(db, 'products'),
+        where('category', '==', category)
+      );
+    } else {
+      productsCollection = collection(db, 'products');
+    }
+
+    getDocs(productsCollection)
+      .then( products => {
+        setItems(products.docs.map( p => ({ id: p.id, ...p.data() }) ));
+      })
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false))
+
   }, [category])
 
   return (

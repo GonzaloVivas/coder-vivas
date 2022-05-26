@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Box, CircularProgress } from '@mui/material';
-import ItemDetail from './ItemDetail';
-import mockItems from '../mocks/itemsMock';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Box, CircularProgress } from '@mui/material';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import ItemDetail from './ItemDetail';
 
 export default function ItemDetailContainer() {
 
@@ -12,23 +12,23 @@ export default function ItemDetailContainer() {
   const [item, setItem] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
 
-  const getItem = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(mockItems.find( item => item.id === Number(id) ))
-    }, 2000);
-  });
-
   useEffect(() => {
-    getItem
-      .then(res => {
-        if (res) {
-          setItem(res);
+
+    setIsLoading(true);
+    const db = getFirestore();
+    const productRef = doc(db, 'products', id);
+
+    getDoc(productRef)
+      .then( product => {
+        if (product.exists()) {
+          setItem({ id: product.id, ...product.data() });
         } else {
           navigate('/404');
         }
       })
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false))
+
   }, [id])
 
   return (

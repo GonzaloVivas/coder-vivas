@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
         if(item.id !== _item.id) {
           return acc.concat(_item);
         } else {
-          return acc.concat({ ..._item, quantity: _item.quantity + item.quantity});
+          return acc.concat({ ..._item, quantity: _item.quantity + item.quantity });
         }
       }, []);
 
