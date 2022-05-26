@@ -35,6 +35,21 @@ export const darkTheme = createTheme({
             border: 'none',
           },
         },
+        danger: {
+          backgroundColor: red[600],
+          borderRadius: '20px',
+          '&:hover': {
+            backgroundColor: red[900],
+          },
+          color: '#ffffff'
+        },
+        dangerUnfilled: {
+          backgroundColor: 'transparent',
+          color: red[100],
+          '&:hover': {
+            backgroundColor: 'transparent',
+          },
+        },
         sizeSmall: {
           backgroundColor: '#7d38d1',
           color: '#ffffff',

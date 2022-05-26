@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import { grey } from "@mui/material/colors";
 import CartDetailTableRow from "./CartDetailTableRow";
 
-export default function CartDetailTable({ cart, totalInCart }) {
+export default function CartDetailTable({ cart, totalInCart, cartClear }) {
 
   return (
     <Box
@@ -51,7 +51,8 @@ export default function CartDetailTable({ cart, totalInCart }) {
                 </Typography>
               </TableCell>
               <TableCell colSpan={2}>
-                <Link to='/checkout' className='button-link'>Finalizar compra</Link>
+                <Link to='/checkout' className='button-link large' style={{ marginRight: 10 }}>Finalizar compra</Link>
+                <Button variant='dangerUnfilled' onClick={cartClear}>Vaciar carrito</Button>
               </TableCell>
             </TableRow>
           </TableBody>
