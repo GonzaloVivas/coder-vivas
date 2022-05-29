@@ -18,7 +18,6 @@ export default function ItemDetail({ item }) {
       addItem({ ...item, quantity: count });
       setAddedToCart(true);
     } else {
-      console.log('Error al agregar al carrito: la cantidad no puede ser 0')
       alert('Error al agregar al carrito: la cantidad no puede ser 0')
     }
   }

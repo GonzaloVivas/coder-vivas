@@ -6,7 +6,7 @@ import CartEmpty from "./CartEmpty";
 
 export default function Cart() {
 
-  const { cart, totalInCart, cartClear } = useContext(CartContext);
+  const { cart, totalInCart, totalAmountInCart, cartClear } = useContext(CartContext);
 
   return (
     <Box
@@ -21,7 +21,7 @@ export default function Cart() {
       {
         Boolean(cart.length) ? (
 
-          <CartDetailTable cart={cart} totalInCart={totalInCart()} cartClear={cartClear} />
+          <CartDetailTable cart={cart} totalInCart={totalInCart()} totalAmountInCart={totalAmountInCart()} cartClear={cartClear} />
 
         ) : (
 

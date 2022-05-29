@@ -73,7 +73,6 @@ export const CartProvider = ({ children }) => {
 
   }
 
-
   const cartClear = () => {
     setCart([])
     setCartInLocalStorage([]);
@@ -82,7 +81,7 @@ export const CartProvider = ({ children }) => {
   const isInCart = ( id ) => {
     return cart.some( _item => _item.id === id);
   }
-  
+
   const quantityInCart = ( id ) => {
     const item = cart.find(_item => _item.id === id);
     if (item) {
@@ -95,6 +94,12 @@ export const CartProvider = ({ children }) => {
     return cart.reduce( (acc, item) => {
       return acc = acc + item.quantity
     }, 0)
+  }
+
+  const totalAmountInCart = () => {
+    return cart.reduce((acc, _item) => {
+      return acc + (_item.quantity * _item.price)
+    }, 0);
   }
 
   const getCartFromLocalStorage = () => {
@@ -115,6 +120,7 @@ export const CartProvider = ({ children }) => {
       cartClear,
       quantityInCart,
       totalInCart,
+      totalAmountInCart,
       increaseItemQuantity,
       decreaseItemQuantity
     }}>

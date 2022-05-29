@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import CartDetailTableRow from "./CartDetailTableRow";
 
-export default function CartDetailTable({ cart, totalInCart, cartClear }) {
+export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, cartClear }) {
 
   return (
     <Box
@@ -19,7 +19,7 @@ export default function CartDetailTable({ cart, totalInCart, cartClear }) {
         textAlign: 'center',
       }}
     >
-      <Typography variant='h5' component='h2' sx={{ marginBottom: '10px' }}>Resumen de la compra</Typography>
+      <Typography variant='h5' component='h2' sx={{ marginBottom: '10px' }}>Carrito</Typography>
 
       <TableContainer component={Paper} sx={{ borderRadius: '20px' }}>
         <Table>
@@ -43,9 +43,7 @@ export default function CartDetailTable({ cart, totalInCart, cartClear }) {
                 <Typography variant='body1'>
                   Importe total: $
                   {
-                    cart.reduce((acc, _item) => {
-                      return acc + (_item.quantity * _item.price)
-                    }, 0)
+                    totalAmountInCart
                   }
                   &nbsp;({ totalInCart } producto/s)
                 </Typography>
@@ -58,6 +56,7 @@ export default function CartDetailTable({ cart, totalInCart, cartClear }) {
           </TableBody>
         </Table>
       </TableContainer>
+
     </Box>
   )
 }
