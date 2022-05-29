@@ -26,18 +26,30 @@ export default function Checkout() {
   const saveOrder = async (order) => {
 
     setIsLoading(true);
-      
-    const db = getFirestore();
-    const ordersCollection = collection(db, 'orders');
-    addDoc(ordersCollection, order)
-      .then(({ id }) => {
-        updateStock(order);
-        setOrderId(id);
-        cartClear();
-      })
-      .catch(e => setError('Ocurrió un error al generar la orden. Por favor intente nuevamente en unos minutos.'))
-      .finally(() => setIsLoading(false))
-      
+    
+    checkStock(order).then( stockResponse => {
+
+      if (stockResponse.some( resp => resp === false)) {
+        
+        setError('No tenemos stock suficiente para procesar tu orden.');
+        setIsLoading(false);
+
+      } else {
+
+        const db = getFirestore();
+        const ordersCollection = collection(db, 'orders');
+        addDoc(ordersCollection, order)
+          .then(({ id }) => {
+            updateStock(order);
+            setOrderId(id);
+            cartClear();
+          })
+          .catch(e => setError('Ocurrió un error al generar la orden. Por favor intente nuevamente en unos minutos.'))
+          .finally(() => setIsLoading(false))
+
+      }
+    })
+
   }
 
 
@@ -52,6 +64,32 @@ export default function Checkout() {
         })
       
     })
+  }
+
+  const checkStock = (order) => {
+
+    const promises = [];
+    const db = getFirestore();
+
+    order.cart.forEach( orderProduct => {
+      const productRef = doc(db, 'products', orderProduct.id);
+      const promise = getDoc(productRef)
+        .then(dbProduct => {
+          if (dbProduct.exists()) {
+            if (dbProduct.data().stock < orderProduct.stock) {
+              return false;
+            } else {
+              return true;
+            }
+          }
+        })
+        .catch(err => console.log(err))
+      
+      promises.push(promise)
+    })
+
+    return Promise.all(promises);
+
   }
   
   return (
