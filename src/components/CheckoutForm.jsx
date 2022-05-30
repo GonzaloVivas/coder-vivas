@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Box, Button, CircularProgress, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, InputAdornment, TextField, Typography } from "@mui/material";
 import { AccountCircle, Email, PhoneAndroid } from "@mui/icons-material";
 import { grey } from "@mui/material/colors";
 import { serverTimestamp } from "firebase/firestore";
@@ -81,14 +81,6 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
     <Box sx={{ display: 'flex', borderRadius: '20px', padding: '20px', width: '100%', backgroundColor: grey[900], flexDirection: 'column' }}>
       
       <Typography variant='h6' sx={{ marginBottom: '20px' }}>Datos Personales</Typography>
-
-      {/* {
-        formError && (
-          <Alert severity="error" sx={{ marginBottom: '20px', borderRadius: '20px' }}>
-            { formError }
-          </Alert>
-        )
-      } */}
       
       <form
         style={{ display: 'flex', flexDirection: 'column', width: '100%' }}

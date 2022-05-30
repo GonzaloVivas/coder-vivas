@@ -85,7 +85,6 @@ export default function Checkout() {
           }
         })
         .catch(err => console.log(err))
-      
       promises.push(promise)
     })
 
@@ -139,7 +138,7 @@ export default function Checkout() {
 
           ) : (
 
-          <Box sx={{ display: 'flex', gap: 5, width: '100%' }}>
+              <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 5, width: '100%' }}>
 
             <CheckoutDetail cart={cart} totalAmountInCart={totalAmountInCart()} />
 
