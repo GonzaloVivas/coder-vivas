@@ -79,8 +79,8 @@ export default function ItemDetail({ item }) {
         {
           !addedToCart && (
             <ItemCount
-              stock={stock}
-              initial={1}
+              stock={ quantityInCart(id) ? stock - quantityInCart(id) : stock }
+              initial={ quantityInCart(id) === stock ? 0 : 1 }
               onAdd={onAdd}
             />
           )
