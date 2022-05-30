@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, Box, Button, CircularProgress, InputAdornment, TextField, Typography } from "@mui/material";
 import { AccountCircle, Email, PhoneAndroid } from "@mui/icons-material";
 import { grey } from "@mui/material/colors";
+import { serverTimestamp } from "firebase/firestore";
 
 export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoading }) {
 
@@ -38,7 +39,9 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
     const order = {
       buyer,
       cart,
-      totalAmountInCart
+      totalAmountInCart,
+      status: 'GENERATED',
+      timestamp: serverTimestamp()
     }
 
     saveOrder(order);

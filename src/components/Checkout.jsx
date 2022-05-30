@@ -25,6 +25,7 @@ export default function Checkout() {
 
   const saveOrder = async (order) => {
 
+    setError('')
     setIsLoading(true);
     
     checkStock(order).then( stockResponse => {
