@@ -6,7 +6,9 @@ import { serverTimestamp } from "firebase/firestore";
 
 export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoading }) {
 
-  const [formError, setFormError] = useState('');
+  const [nameError, setNameError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const [buyer, setBuyer] = useState({
     name: '',
@@ -23,42 +25,70 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormError('');
 
-    if (!buyer.name || !buyer.phone || !buyer.email) {
-      setFormError('Debe completar todos los campos');
-      return;
+    if (validateForm()) {
+  
+      const order = {
+        buyer,
+        cart,
+        totalAmountInCart,
+        status: 'GENERATED',
+        timestamp: serverTimestamp()
+      }
+  
+      saveOrder(order);
     }
 
-    const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(buyer.email);
-    if (!validEmail) {
-      setFormError('Debe ingresar un email válido');
-      return;
-    }
-
-    const order = {
-      buyer,
-      cart,
-      totalAmountInCart,
-      status: 'GENERATED',
-      timestamp: serverTimestamp()
-    }
-
-    saveOrder(order);
   }
+
+  const validateForm = () => {
+    
+    resetFormErrors();
+    let validForm = true;
+
+    if (!buyer.name) {
+      setNameError(true);
+      validForm = false;
+    }
+    if (
+      !buyer.phone ||
+      !/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(buyer.phone)
+    ) {
+      setPhoneError(true);
+      validForm = false;
+    }
+    if (
+      !buyer.email || 
+      !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(buyer.email)
+    ) {
+      setEmailError(true);
+      validForm = false;
+    }
+
+    return validForm
+
+  }
+
+  const resetFormErrors = () => {
+    setNameError(false);
+    setPhoneError(false);
+    setEmailError(false);
+  }
+
+
 
   return (
     <Box sx={{ display: 'flex', borderRadius: '20px', padding: '20px', width: '100%', backgroundColor: grey[900], flexDirection: 'column' }}>
       
       <Typography variant='h6' sx={{ marginBottom: '20px' }}>Datos Personales</Typography>
 
-      {
+      {/* {
         formError && (
           <Alert severity="error" sx={{ marginBottom: '20px', borderRadius: '20px' }}>
             { formError }
           </Alert>
         )
-      }
+      } */}
       
       <form
         style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
@@ -67,7 +97,7 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
 
         <TextField
           name='name'
-          label='Nombre'
+          label='Nombre y Apellido'
           variant='outlined'
           sx={{ marginBottom: '20px' }}
           InputProps={{
@@ -77,6 +107,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
+          error={ nameError }
+          helperText={ nameError && 'Debe indicar su nombre y apellido'}
           onChange={handleChange}
         />
 
@@ -92,6 +124,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
+          error={phoneError}
+          helperText={phoneError && 'Debe indicar un número de teléfono válido'}
           onChange={handleChange}
         />
 
@@ -108,6 +142,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
+          error={emailError}
+          helperText={emailError && 'Debe indicar una dirección de email válida'}
           onChange={handleChange}
         />
 
