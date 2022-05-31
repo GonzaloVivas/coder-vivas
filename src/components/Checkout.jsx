@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/cart/CartContext";
 import CheckoutDetail from "./CheckoutDetail";
 import CheckoutForm from "./CheckoutForm";
-import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
+import { getProduct, setOrder, updateProductStock } from '../firebase/api';
 
 export default function Checkout() {
 
@@ -23,74 +23,51 @@ export default function Checkout() {
     }
   }, []);  
 
-  const saveOrder = async (order) => {
+  const saveOrder = (order) => {
 
     setError('')
     setIsLoading(true);
     
-    checkStock(order).then( stockResponse => {
+    checkStock(order.cart).then( async stockResponse => {
 
       if (stockResponse.some( resp => resp === false)) {
-        
+
         setError('No tenemos stock suficiente para procesar tu orden.');
         setIsLoading(false);
 
       } else {
-
-        const db = getFirestore();
-        const ordersCollection = collection(db, 'orders');
-        addDoc(ordersCollection, order)
-          .then(({ id }) => {
-            updateStock(order);
-            setOrderId(id);
-            cartClear();
-          })
-          .catch(e => setError('Ocurrió un error al generar la orden. Por favor intente nuevamente en unos minutos.'))
-          .finally(() => setIsLoading(false))
-
+        const orderId = await setOrder(order);
+        updateStock(order.cart);
+        setOrderId(orderId);
+        cartClear();
       }
     })
 
   }
 
-
-  const updateStock = (order) => {
-    const db = getFirestore();
-    order.cart.forEach( orderProduct => {
-      const productDoc = doc(db, 'products', orderProduct.id);
-      getDoc(productDoc)
-        .then(dbProduct => {
-          const newStock = dbProduct.data().stock - orderProduct.quantity;
-          updateDoc(productDoc, { stock: newStock })
-        })
-      
+  const updateStock = (cart) => {
+    cart.forEach( async orderProduct => {
+      await updateProductStock(orderProduct.id, orderProduct.quantity);
     })
   }
 
-  const checkStock = (order) => {
+  const checkStock = async (cart) => {
 
-    const promises = [];
-    const db = getFirestore();
+    const promises = cart.map( async orderProduct => {
 
-    order.cart.forEach( orderProduct => {
-      const productRef = doc(db, 'products', orderProduct.id);
-      const promise = getDoc(productRef)
-        .then(dbProduct => {
-          if (dbProduct.exists()) {
-            if (dbProduct.data().stock < orderProduct.stock) {
-              return false;
-            } else {
-              return true;
-            }
-          }
-        })
-        .catch(err => console.log(err))
-      promises.push(promise)
+      const product = await getProduct(orderProduct.id);
+      if (product.stock < orderProduct.quantity) {
+        return false;
+      } else {
+        return true;
+      }
+
     })
 
     return Promise.all(promises);
 
   }
+
   
   return (
     <Box

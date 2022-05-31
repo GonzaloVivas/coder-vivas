@@ -75,8 +75,6 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
     setEmailError(false);
   }
 
-
-
   return (
     <Box sx={{ display: 'flex', borderRadius: '20px', padding: '20px', width: '100%', backgroundColor: grey[900], flexDirection: 'column' }}>
       
