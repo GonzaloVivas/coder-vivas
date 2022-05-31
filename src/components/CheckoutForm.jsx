@@ -6,9 +6,11 @@ import { serverTimestamp } from "firebase/firestore";
 
 export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoading }) {
 
-  const [nameError, setNameError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  const [formErrors, setFormErrors] = useState({
+    name: false,
+    phone: false,
+    email: false
+  });
 
   const [buyer, setBuyer] = useState({
     name: '',
@@ -17,15 +19,22 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
   });
 
   const handleChange = (e) => {
-    setBuyer({
-      ...buyer,
-      [e.target.name]: e.target.value
-    });
+
+    if (!e.target.value) {
+      setFormErrors({ ...formErrors, [e.target.name]: true });
+    } else {
+      setFormErrors({ ...formErrors, [e.target.name]: false });
+      setBuyer({
+        ...buyer,
+        [e.target.name]: e.target.value
+      });
+    }
+
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if (validateForm()) {
   
       const order = {
@@ -47,21 +56,21 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
     let validForm = true;
 
     if (!buyer.name) {
-      setNameError(true);
+      setFormErrors(formErrors => ({ ...formErrors, name: true }));
       validForm = false;
     }
     if (
       !buyer.phone ||
       !/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/.test(buyer.phone)
     ) {
-      setPhoneError(true);
+      setFormErrors(formErrors => ({ ...formErrors, phone: true }));
       validForm = false;
     }
     if (
       !buyer.email || 
       !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(buyer.email)
     ) {
-      setEmailError(true);
+      setFormErrors(formErrors => ({ ...formErrors, email: true }));
       validForm = false;
     }
 
@@ -70,9 +79,7 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
   }
 
   const resetFormErrors = () => {
-    setNameError(false);
-    setPhoneError(false);
-    setEmailError(false);
+    setFormErrors({ name: false, phone: false, email: false });
   }
 
   return (
@@ -97,8 +104,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
-          error={ nameError }
-          helperText={ nameError && 'Debe indicar su nombre y apellido'}
+          error={ formErrors.name }
+          helperText={ formErrors.name && 'Debe indicar su nombre y apellido'}
           onChange={handleChange}
         />
 
@@ -114,8 +121,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
-          error={phoneError}
-          helperText={phoneError && 'Debe indicar un número de teléfono válido'}
+          error={formErrors.phone}
+          helperText={formErrors.phone && 'Debe indicar un número de teléfono válido'}
           onChange={handleChange}
         />
 
@@ -132,8 +139,8 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
               </InputAdornment>
             ),
           }}
-          error={emailError}
-          helperText={emailError && 'Debe indicar una dirección de email válida'}
+          error={formErrors.email}
+          helperText={formErrors.email && 'Debe indicar una dirección de email válida'}
           onChange={handleChange}
         />
 
