@@ -25,31 +25,48 @@ export const getProducts = async(category = null) => {
     productsCollection = collection(db, 'products');
   }
 
-  const res = await getDocs(productsCollection);
-  const products = res.docs.map(p => ({ id: p.id, ...p.data() }));
-  return products;
+  try {
+    const res = await getDocs(productsCollection);
+    const products = res.docs.map(p => ({ id: p.id, ...p.data() }));
+    return products;
+  } catch (error) {
+    console.log('Ocurrió un error', error);
+  }
 }
 
 export const getProduct = async (id) => {
   const productRef = doc(db, 'products', id);
-  const res = await getDoc(productRef);
-  if (res.exists()) {
-    const product = {id: res.id, ...res.data()};
-    return product
-  } else {
-    return null;
+
+  try {
+    const res = await getDoc(productRef);
+    if (res.exists()) {
+      const product = {id: res.id, ...res.data()};
+      return product
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log('Ocurrió un error', error);
   }
 }
 
 export const setOrder = async(order) => {
   const ordersCollection = collection(db, 'orders');
-  const { id } = await addDoc(ordersCollection, order)
-  return id;
+  try {
+    const { id } = await addDoc(ordersCollection, order)
+    return id;
+  } catch (error) {
+    console.log('Ocurrió un error', error);
+  }
 }
 
 export const updateProductStock = async(id, orderQuantity) => {
   const productRef = doc(db, 'products', id);
-  const { stock } = await getProduct(id);
-  const newStock = stock - orderQuantity;
-  updateDoc(productRef, { stock: newStock });
+  try {
+    const { stock } = await getProduct(id);
+    const newStock = stock - orderQuantity;
+    updateDoc(productRef, { stock: newStock });
+  } catch (error) {
+    console.log('Ocurrió un error', error);
+  }
 }
