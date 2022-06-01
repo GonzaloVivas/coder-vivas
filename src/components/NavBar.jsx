@@ -31,7 +31,7 @@ export const NavBar = () => {
   const { totalInCart } = useContext(CartContext)
 
   return (
-    <AppBar position='sticky' elevation={0} background='#0d47a1'>
+    <AppBar position='sticky' elevation={0}>
       <Container maxWidth='xl'>
         <Toolbar>
           

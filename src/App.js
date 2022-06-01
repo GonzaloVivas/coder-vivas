@@ -9,6 +9,7 @@ import NotFound from './components/NotFound';
 import { darkTheme } from './themes/dark-theme';
 import './App.css';
 import { CartProvider } from './context/cart/CartContext';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
           <CartProvider>
 
             <NavBar />
-            <Container maxWidth='xl'>
+            <Container maxWidth='xl' sx={{ minHeight: 'calc(100vh - 475px)' }}>
                 <Routes>
                   <Route path='/' element={ <ItemListContainer />}/>
                   <Route path='/category/:category' element={ <ItemListContainer />}/>
@@ -30,6 +31,7 @@ function App() {
                   <Route path='/*' element={ <NotFound /> }/>
                 </Routes>
             </Container>
+            <Footer />
 
           </CartProvider>
           
