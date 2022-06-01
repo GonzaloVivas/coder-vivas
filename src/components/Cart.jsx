@@ -7,15 +7,17 @@ import CartEmpty from "./CartEmpty";
 export default function Cart() {
 
   const { cart, totalInCart, totalAmountInCart, cartClear } = useContext(CartContext);
-
+  
   return (
     <Box
       container
       sx={{
-        marginTop: '40px',
         display: 'flex',
         justifyContent: 'center',
         gap: 2,
+        maxWidth: '950px',
+        margin: 'auto',
+        marginTop: '40px',
       }}
     >
       {

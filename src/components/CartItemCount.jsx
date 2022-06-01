@@ -5,7 +5,7 @@ import React from 'react'
 export default function CartItemCount({ quantity, stock, onIncrease, onDecrease, onRemove}) {
   return (
     <>
-      <Box sx={{ marginX: 'auto' }}>
+      <Box sx={{ marginX: 'auto', minWidth: '160px', maxWidth: '200px' }}>
         <Box
           sx={{
             display: 'flex',

@@ -98,6 +98,13 @@ export const darkTheme = createTheme({
           width: '300px'
         }
       }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff'
+        }
+      }
     }
   }
 });
