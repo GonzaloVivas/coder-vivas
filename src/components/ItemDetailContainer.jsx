@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import ItemDetail from './ItemDetail';
 import { getProduct } from '../firebase/api';
+import ItemDetailSkeleton from './ItemDetailSkeleton';
 
 export default function ItemDetailContainer() {
 
@@ -39,21 +40,7 @@ export default function ItemDetailContainer() {
       {
         isLoading ?
         (
-          <Box
-            sx={{
-              marginTop: '40px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <CircularProgress
-              variant="indeterminate"
-              size={40}
-              thickness={4}
-              value={100}
-            />
-          </Box>
+          <ItemDetailSkeleton />
         )
         : (
           <ItemDetail item={ item } />
