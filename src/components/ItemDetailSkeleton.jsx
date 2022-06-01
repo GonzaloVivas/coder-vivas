@@ -1,12 +1,10 @@
-import { Box, Skeleton } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Box, Card, Skeleton } from "@mui/material";
 
 export default function ItemDetailSkeleton() {
   return (
-    <Box
+    <Card
       sx={{
         width: '100%',
-        backgroundColor: grey[800],
         borderRadius: '20px',
         padding: '20px',
         display: 'flex',
@@ -77,6 +75,6 @@ export default function ItemDetailSkeleton() {
         </Box>
 
       </Box>
-    </Box>
+    </Card>
   )
 }

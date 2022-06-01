@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
-import { Box, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Box, Card, Typography } from "@mui/material";
 import { CartContext } from "../context/cart/CartContext";
 import ItemCount from "./ItemCount";
 import ItemInCartAlert from "./ItemInCartAlert";
@@ -28,10 +27,9 @@ export default function ItemDetail({ item }) {
   }
 
   return (
-    <Box 
+    <Card
       sx={{
         width: '100%',
-        backgroundColor: grey[800],
         borderRadius: '20px',
         padding: '20px',
         display: 'flex',
@@ -96,6 +94,6 @@ export default function ItemDetail({ item }) {
         }
 
       </Box>
-    </Box>
+    </Card>
   )
 }

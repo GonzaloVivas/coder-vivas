@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { Box, Button, Link as MuiLink , Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { Box, Button, Card, Link as MuiLink , Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useMediaQuery, useTheme } from "@mui/material";
 import CartDetailTableRow from "./CartDetailTableRow";
 
 export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, cartClear }) {
@@ -9,10 +8,9 @@ export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, 
   const largeScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <Box
+    <Card
       sx={{
         width: '100%',
-        backgroundColor: grey[800],
         borderRadius: '20px',
         padding: '20px',
         display: 'flex',
@@ -24,7 +22,7 @@ export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, 
     >
       <Typography variant='h5' component='h2' sx={{ marginBottom: '10px' }}>Carrito</Typography>
 
-      <TableContainer component={Paper} sx={{ borderRadius: '20px' }}>
+      <TableContainer elevation={0} component={Card} variant='dark' sx={{ borderRadius: '20px', boxShadow: 'unset' }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -53,7 +51,7 @@ export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, 
         </Table>
       </TableContainer>
 
-      <Box sx={{ width: '100%', backgroundColor: grey[900], borderRadius: '20px', padding: '20px', marginTop: '20px' }}>
+      <Card variant='dark' sx={{ width: '100%', borderRadius: '20px', padding: '20px', marginTop: '20px', boxShadow: 'unset' }}>
         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
           Importe total: $
           {
@@ -65,7 +63,7 @@ export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, 
         <Box
           sx={{ display: 'flex', justifyContent: 'center', flexDirection: { xs: 'column', sm: 'row' }, marginTop: '20px', gap: { sm: '20px' } }}
         >
-          <MuiLink component={Link} to='/checkout' className='button-link large' sx={{ display: 'flex', alignSelf: 'flex-start', margin: { xs: 'auto', sm: 'unset' } }}>Finalizar compra</MuiLink>
+          <MuiLink component={Link} to='/checkout' className='button-link large' sx={{ display: 'flex', alignSelf: 'flex-start', margin: { xs: 'auto', sm: 'unset' }, textDecoration: 'none' }}>Finalizar compra</MuiLink>
 
           <Button
             variant='dangerUnfilled'
@@ -76,8 +74,8 @@ export default function CartDetailTable({ cart, totalInCart, totalAmountInCart, 
           </Button>
         </Box>
 
-      </Box>
+      </Card>
 
-    </Box>
+    </Card>
   )
 }

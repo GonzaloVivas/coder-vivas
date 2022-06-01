@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Box, Button, CircularProgress, InputAdornment, TextField, Typography } from "@mui/material";
+import { Button, Card, CircularProgress, InputAdornment, TextField, Typography } from "@mui/material";
 import { AccountCircle, Email, PhoneAndroid } from "@mui/icons-material";
-import { grey } from "@mui/material/colors";
 import { serverTimestamp } from "firebase/firestore";
 
 export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoading }) {
@@ -83,7 +82,7 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
   }
 
   return (
-    <Box sx={{ display: 'flex', borderRadius: '20px', padding: '20px', width: '100%', backgroundColor: grey[900], flexDirection: 'column' }}>
+    <Card variant='dark' sx={{ display: 'flex', borderRadius: '20px', padding: '20px', width: '100%', flexDirection: 'column', boxShadow: 'unset' }}>
       
       <Typography variant='h6' sx={{ marginBottom: '20px' }}>Datos Personales</Typography>
       
@@ -164,6 +163,6 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
 
       </form>
 
-    </Box>
+    </Card>
   )
 }

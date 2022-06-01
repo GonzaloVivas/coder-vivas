@@ -4,6 +4,8 @@ import { grey } from "@mui/material/colors";
 import logo from '../logo.svg';
 
 export default function Footer() {
+
+
   return (
     <Box
       sx={{
@@ -15,7 +17,8 @@ export default function Footer() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        color: '#ffffff'
       }}
     >
       <img width={60} height={60} src={logo} alt="MorfiStore" />

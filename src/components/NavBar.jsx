@@ -1,13 +1,12 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { AppBar, Box, Button, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { AppBar, Box, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { DarkMode, LightMode, Menu } from '@mui/icons-material';
 
 import CartWidget from './CartWidget';
-import logo from '../logo.svg';
 import { Link, NavLink } from 'react-router-dom';
 import { CartContext } from '../context/cart/CartContext';
+import logo from '../logo.svg';
 
 const categories = [
   {
@@ -24,10 +23,9 @@ const categories = [
   },
 ];
 
-export const NavBar = () => {
+export const NavBar = ({ colorMode, toggleColorMode }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
   const { totalInCart } = useContext(CartContext)
 
   return (
@@ -79,13 +77,9 @@ export const NavBar = () => {
             <Link to='/cart'>
               <CartWidget cartCount={ totalInCart() } />
             </Link>
-            <Button
-              variant='primary'
-              sx={{ display: 'flex' }}
-              startIcon={<AccountCircleIcon />}
-            >
-              Login
-            </Button>
+            <IconButton onClick={toggleColorMode} color="inherit">
+              {colorMode === 'dark' ? <DarkMode /> : <LightMode />}
+            </IconButton>
           </Box>
           {/* END DESKTOP */}
 
@@ -101,7 +95,7 @@ export const NavBar = () => {
               sx={{ display: { xs: 'flex', md: 'none' } }}
               onClick={ () => setIsDrawerOpen(!isDrawerOpen) }
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
 
             <Drawer
@@ -117,7 +111,13 @@ export const NavBar = () => {
                       className='nav-link'
                       onClick={ () => setIsDrawerOpen(false) }
                     >
-                      <ListItem>
+                      <ListItem
+                        sx={
+                          colorMode === 'dark' ? 
+                            { color: '#ffffff' } :
+                            { color: '#000000'}
+                        }
+                      >
                         <ListItemButton sx={{ paddingX: '50px' }}>
                           <ListItemText sx={{ textAlign: 'center' }} primary={ label } />
                         </ListItemButton>
@@ -128,13 +128,9 @@ export const NavBar = () => {
               </List>
               <Divider />
               <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-                <Button
-                  variant='primary'
-                  sx={{ display: 'flex' }}
-                  startIcon={<AccountCircleIcon />}
-                >
-                  Login
-                </Button>
+                <IconButton onClick={toggleColorMode} color="inherit">
+                  {colorMode === 'dark' ? <DarkMode /> : <LightMode />}
+                </IconButton>
               </Box>
             </Drawer>
             

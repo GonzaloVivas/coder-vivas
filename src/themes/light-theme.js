@@ -1,11 +1,11 @@
 import { createTheme } from "@mui/material";
 import { grey, red } from '@mui/material/colors';
 
-export const darkTheme = createTheme({
+export const lightTheme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     background: {
-      default: grey[900]
+      // default: grey[900]
     },
     primary: {
       main: '#7d38d1',
@@ -23,7 +23,7 @@ export const darkTheme = createTheme({
           backgroundColor: '#7d38d1',
           borderRadius: '20px',
           '&:hover': {
-            backgroundColor: '#4a148c'
+            backgroundColor: '#652cab'
           },
           color: '#ffffff'
         },
@@ -45,7 +45,7 @@ export const darkTheme = createTheme({
         },
         dangerUnfilled: {
           backgroundColor: 'transparent',
-          color: red[100],
+          color: red[500],
           '&:hover': {
             backgroundColor: 'transparent',
           },
@@ -54,7 +54,7 @@ export const darkTheme = createTheme({
           backgroundColor: '#7d38d1',
           color: '#ffffff',
           '&:hover': {
-            backgroundColor: '#4a148c',
+            backgroundColor: '#652cab',
           }
         },
         sizeLarge: {
@@ -64,7 +64,7 @@ export const darkTheme = createTheme({
           backgroundColor: '#7d38d1',
           color: '#ffffff',
           '&:hover': {
-            backgroundColor: '#4a148c',
+            backgroundColor: '#652cab',
           }
         },
       },
@@ -91,24 +91,17 @@ export const darkTheme = createTheme({
     },
     MuiCard: {
       defaultProps: {
-        elevation: 0,
+        elevation: 0
       },
       styleOverrides: {
         root: {
-          backgroundColor: grey[800],
+          elevation: 0,
           borderRadius: '20px',
           textAlign: 'center',
-          width: '300px'
-        },
-      },
-      variants: [
-        {
-          props: { variant: 'dark' },
-          style: {
-            backgroundColor: grey[900]
-          }
+          width: '300px',
+          boxShadow: '0px 0px 40px 1px rgb(71, 71, 71, 0.3)',
         }
-      ]
+      }
     },
     MuiLink: {
       styleOverrides: {
@@ -117,5 +110,5 @@ export const darkTheme = createTheme({
         }
       }
     }
-  }
+  },
 });

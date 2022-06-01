@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { Alert, Box, Typography } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Alert, Box, Card, Typography } from "@mui/material";
 import { CartContext } from "../context/cart/CartContext";
 import CheckoutDetail from "./CheckoutDetail";
 import CheckoutForm from "./CheckoutForm";
@@ -81,10 +80,9 @@ export default function Checkout() {
         marginTop: '40px',
       }}
     >
-      <Box
+      <Card
         sx={{
           width: '100%',
-          backgroundColor: grey[800],
           borderRadius: '20px',
           padding: '20px',
           display: 'flex',
@@ -126,7 +124,7 @@ export default function Checkout() {
           )
         }
 
-      </Box>
+      </Card>
     </Box>
   )
 }

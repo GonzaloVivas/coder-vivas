@@ -6,7 +6,7 @@ const Item = ({ item }) => {
   const { id, title, shortDescription, price, pictureUrl, stock} = item;
 
   return (
-    <Card elevation={0}>
+    <Card>
       <CardMedia
         component='img'
         height='200'
