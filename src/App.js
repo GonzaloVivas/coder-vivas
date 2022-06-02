@@ -12,6 +12,7 @@ import { darkTheme } from './themes/dark-theme';
 import './App.css';
 import { CartProvider } from './context/cart/CartContext';
 import Footer from './components/layout/Footer';
+import { CategoriesProvider } from './context/categories/CategoriesContext';
 
 function App() {
 
@@ -25,22 +26,25 @@ function App() {
     <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
       <CssBaseline>
         <BrowserRouter>
+
+          <CategoriesProvider>
             <CartProvider>
 
-            <NavBar colorMode={colorMode} toggleColorMode={toggleColorMode} />
+              <NavBar colorMode={colorMode} toggleColorMode={toggleColorMode} />
               <Container maxWidth='xl' sx={{ minHeight: 'calc(100vh - 475px)' }}>
-                  <Routes>
-                    <Route path='/' element={ <ItemListContainer />}/>
-                    <Route path='/category/:category' element={ <ItemListContainer />}/>
-                    <Route path='/item/:id' element={ <ItemDetailContainer />}/>
-                    <Route path='/cart' element={ <Cart />}/>
-                    <Route path='/checkout' element={ <Checkout />}/>
-                    <Route path='/*' element={ <NotFound /> }/>
-                  </Routes>
+                <Routes>
+                  <Route path='/' element={ <ItemListContainer />}/>
+                  <Route path='/category/:category' element={ <ItemListContainer />}/>
+                  <Route path='/item/:id' element={ <ItemDetailContainer />}/>
+                  <Route path='/cart' element={ <Cart />}/>
+                  <Route path='/checkout' element={ <Checkout />}/>
+                  <Route path='/*' element={ <NotFound /> }/>
+                </Routes>
               </Container>
               <Footer />
 
             </CartProvider>
+          </CategoriesProvider>
           
         </BrowserRouter>
       </CssBaseline>

@@ -109,6 +109,13 @@ export const lightTheme = createTheme({
           color: '#ffffff'
         }
       }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          color: '#000000',
+        }
+      }
     }
   },
 });

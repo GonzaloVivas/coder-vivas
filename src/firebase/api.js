@@ -13,6 +13,19 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const db = getFirestore();
 
+export const getCategories = async() => {
+
+  const categoriesCollection = collection(db, 'categories');
+
+  try {
+    const res = await getDocs(categoriesCollection);
+    const categories = res.docs.map(c => ({ id: c.id, ...c.data() }));
+    return categories;
+  } catch (error) {
+    console.log('Ocurrió un error', error);
+  }
+}
+
 export const getProducts = async(category = null) => {
   let productsCollection;
 

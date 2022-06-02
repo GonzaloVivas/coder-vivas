@@ -116,6 +116,13 @@ export const darkTheme = createTheme({
           color: '#ffffff'
         }
       }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff',
+        }
+      }
     }
   }
 });

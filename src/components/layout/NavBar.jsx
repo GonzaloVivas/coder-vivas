@@ -1,31 +1,19 @@
 import { useContext, useState } from 'react'
 
-import { AppBar, Box, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Skeleton, Toolbar, Typography } from '@mui/material';
 import { DarkMode, LightMode, Menu } from '@mui/icons-material';
 
 import CartWidget from '../cart/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
 import { CartContext } from '../../context/cart/CartContext';
-import logo from '../../logo.svg';
+import { CategoriesContext } from '../../context/categories/CategoriesContext';
 
-const categories = [
-  {
-    slug: 'comida',
-    label: 'Comida'
-  },
-  {
-    slug: 'bebida',
-    label: 'Bebida'
-  },
-  {
-    slug: 'accesorios',
-    label: 'Accesorios'
-  },
-];
+import logo from '../../logo.svg';
 
 export default function NavBar({ colorMode, toggleColorMode }) {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const { categories } = useContext(CategoriesContext);
   const { totalInCart } = useContext(CartContext)
 
   return (
@@ -61,15 +49,22 @@ export default function NavBar({ colorMode, toggleColorMode }) {
 
           <Box sx={{ flexGrow: 1, justifyContent: 'center', alignContent: 'center', gap: 4, display: { xs: 'none', md: 'flex' } }}>
             {
-              categories.map( ({ slug, label }) => (
-                <NavLink
-                  to={ `category/${slug}` }
-                  key={ label }
-                  className='nav-link'
-                >
-                  { label }
-                </NavLink>
-              ))
+              categories.length ?
+                categories.map( ({ slug, label }) => (
+                  <NavLink
+                    to={ `category/${slug}` }
+                    key={ label }
+                    className='nav-link'
+                  >
+                    { label }
+                  </NavLink>
+                ))
+                :
+                <>
+                  <Skeleton height='30px' width='100px' />
+                  <Skeleton height='30px' width='100px' />
+                  <Skeleton height='30px' width='100px' />
+                </>
             }
           </Box>
 
@@ -104,26 +99,39 @@ export default function NavBar({ colorMode, toggleColorMode }) {
             >
               <List>
                 {
-                  categories.map(({ slug, label }) => (
-                    <Link
-                      to={`category/${slug}`}
-                      key={label}
-                      className='nav-link'
-                      onClick={ () => setIsDrawerOpen(false) }
-                    >
-                      <ListItem
-                        sx={
-                          colorMode === 'dark' ? 
-                            { color: '#ffffff' } :
-                            { color: '#000000'}
-                        }
+                  categories.length ?
+                    categories.map(({ slug, label }) => (
+                      <Link
+                        to={`category/${slug}`}
+                        key={label}
+                        className='nav-link'
+                        onClick={ () => setIsDrawerOpen(false) }
                       >
+                        <ListItem>
+                          <ListItemButton sx={{ paddingX: '50px' }}>
+                            <ListItemText sx={{ textAlign: 'center' }} primary={ label } />
+                          </ListItemButton>
+                        </ListItem>
+                      </Link>
+                    ))
+                    :
+                    <>
+                      <ListItem>
                         <ListItemButton sx={{ paddingX: '50px' }}>
-                          <ListItemText sx={{ textAlign: 'center' }} primary={ label } />
+                          <Skeleton width='115px' height='40px' />
                         </ListItemButton>
                       </ListItem>
-                    </Link>
-                  ))
+                      <ListItem>
+                        <ListItemButton sx={{ paddingX: '50px' }}>
+                          <Skeleton width='115px' height='40px' />
+                        </ListItemButton>
+                      </ListItem>
+                      <ListItem>
+                        <ListItemButton sx={{ paddingX: '50px' }}>
+                          <Skeleton width='115px' height='40px' />
+                        </ListItemButton>
+                      </ListItem>
+                    </>
                 }
               </List>
               <Divider />
