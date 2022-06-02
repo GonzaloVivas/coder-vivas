@@ -1,7 +1,7 @@
 import { GitHub } from "@mui/icons-material";
 import { Box, Divider, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import logo from '../logo.svg';
+import logo from '../../logo.svg';
 
 export default function Footer() {
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import ItemList from './ItemList';
-import { getProducts } from '../firebase/api';
 import ItemSkeleton from './ItemSkeleton';
+import { getProducts } from '../../firebase/api';
 
 export default function ItemListContainer() {
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import ItemDetail from './ItemDetail';
-import { getProduct } from '../firebase/api';
 import ItemDetailSkeleton from './ItemDetailSkeleton';
+import { getProduct } from '../../firebase/api';
 
 export default function ItemDetailContainer() {
 

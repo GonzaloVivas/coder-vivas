@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Box } from "@mui/material";
-import { CartContext } from "../context/cart/CartContext";
+import { CartContext } from "../../context/cart/CartContext";
 import CartDetailTable from "./CartDetailTable";
 import CartEmpty from "./CartEmpty";
 

@@ -1,6 +1,6 @@
 import { Avatar, ListItem, ListItemAvatar, ListItemText, TableCell, TableRow } from "@mui/material";
 import { useContext } from "react";
-import { CartContext } from "../context/cart/CartContext";
+import { CartContext } from "../../context/cart/CartContext";
 import CartItemCount from "./CartItemCount";
 
 export default function CartDetailTableRow({ item, largeScreen }) {

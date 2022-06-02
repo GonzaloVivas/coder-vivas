@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Box, Card, Typography } from "@mui/material";
-import { CartContext } from "../context/cart/CartContext";
+import { CartContext } from "../../context/cart/CartContext";
 import ItemCount from "./ItemCount";
 import ItemInCartAlert from "./ItemInCartAlert";
 

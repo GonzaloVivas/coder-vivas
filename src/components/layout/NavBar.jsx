@@ -3,10 +3,10 @@ import { useContext, useState } from 'react'
 import { AppBar, Box, Container, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Toolbar, Typography } from '@mui/material';
 import { DarkMode, LightMode, Menu } from '@mui/icons-material';
 
-import CartWidget from './CartWidget';
+import CartWidget from '../cart/CartWidget';
 import { Link, NavLink } from 'react-router-dom';
-import { CartContext } from '../context/cart/CartContext';
-import logo from '../logo.svg';
+import { CartContext } from '../../context/cart/CartContext';
+import logo from '../../logo.svg';
 
 const categories = [
   {
@@ -23,7 +23,7 @@ const categories = [
   },
 ];
 
-export const NavBar = ({ colorMode, toggleColorMode }) => {
+export default function NavBar({ colorMode, toggleColorMode }) {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const { totalInCart } = useContext(CartContext)
@@ -78,7 +78,7 @@ export const NavBar = ({ colorMode, toggleColorMode }) => {
               <CartWidget cartCount={ totalInCart() } />
             </Link>
             <IconButton onClick={toggleColorMode} color="inherit">
-              {colorMode === 'dark' ? <DarkMode /> : <LightMode />}
+              {colorMode === 'dark' ? <LightMode /> : <DarkMode />}
             </IconButton>
           </Box>
           {/* END DESKTOP */}
@@ -129,7 +129,7 @@ export const NavBar = ({ colorMode, toggleColorMode }) => {
               <Divider />
               <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
                 <IconButton onClick={toggleColorMode} color="inherit">
-                  {colorMode === 'dark' ? <DarkMode /> : <LightMode />}
+                  {colorMode === 'dark' ? <LightMode /> : <DarkMode />}
                 </IconButton>
               </Box>
             </Drawer>

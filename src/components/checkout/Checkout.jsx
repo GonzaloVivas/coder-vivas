@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Alert, Box, Card, Typography } from "@mui/material";
-import { CartContext } from "../context/cart/CartContext";
+import { CartContext } from "../../context/cart/CartContext";
 import CheckoutDetail from "./CheckoutDetail";
 import CheckoutForm from "./CheckoutForm";
-import { getProduct, setOrder, updateProductStock } from '../firebase/api';
+import { getProduct, setOrder, updateProductStock } from '../../firebase/api';
 
 export default function Checkout() {
 
