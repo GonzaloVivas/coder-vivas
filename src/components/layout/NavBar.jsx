@@ -8,7 +8,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { CartContext } from '../../context/cart/CartContext';
 import { CategoriesContext } from '../../context/categories/CategoriesContext';
 
-import logo from '../../logo.svg';
+import logo from '../../images/logo.png';
 
 export default function NavBar({ colorMode, toggleColorMode }) {
 
@@ -29,8 +29,8 @@ export default function NavBar({ colorMode, toggleColorMode }) {
               textDecoration: 'none',
               color: '#ffffff',
             }}>
-              <IconButton sx={{ p: 0, display: { xs: 'none', md: 'flex' } }}>
-                <img width={60} height={60} src={logo} alt="MorfiStore" />
+              <IconButton sx={{ p: 0, marginRight: 1, display: { xs: 'none', md: 'flex' } }}>
+                <img width={45} height={45} src={logo} alt="MorfiStore" />
               </IconButton>
               <Typography
                 variant="h4"
@@ -149,8 +149,8 @@ export default function NavBar({ colorMode, toggleColorMode }) {
                 textDecoration: 'none',
                 color: '#ffffff',
               }}>
-                <IconButton sx={{ p: 0 }}>
-                  <img width={60} height={60} src={logo} alt="MorfiStore" />
+                <IconButton sx={{ p: 0, marginRight: 1}}>
+                  <img width={35} height={35} src={logo} alt="MorfiStore" />
                 </IconButton>
 
                 <Typography
