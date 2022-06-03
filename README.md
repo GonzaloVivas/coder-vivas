@@ -51,8 +51,8 @@ product = {
   title: "Nombre del producto"
 }
 ```
-```
 ##### Ejemplo de category:
+```
 product = {
   label: "Comidas"
   slug: "comidas"
