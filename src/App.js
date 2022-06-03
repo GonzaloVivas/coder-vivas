@@ -13,6 +13,7 @@ import './App.css';
 import { CartProvider } from './context/cart/CartContext';
 import Footer from './components/layout/Footer';
 import { CategoriesProvider } from './context/categories/CategoriesContext';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
@@ -32,14 +33,16 @@ function App() {
 
               <NavBar colorMode={colorMode} toggleColorMode={toggleColorMode} />
               <Container maxWidth='xl' sx={{ minHeight: 'calc(100vh - 475px)' }}>
-                <Routes>
-                  <Route path='/' element={ <ItemListContainer />}/>
-                  <Route path='/category/:category' element={ <ItemListContainer />}/>
-                  <Route path='/item/:id' element={ <ItemDetailContainer />}/>
-                  <Route path='/cart' element={ <Cart />}/>
-                  <Route path='/checkout' element={ <Checkout />}/>
-                  <Route path='/*' element={ <NotFound /> }/>
-                </Routes>
+                <ScrollToTop>
+                  <Routes>
+                    <Route path='/' element={ <ItemListContainer />}/>
+                    <Route path='/category/:category' element={ <ItemListContainer />}/>
+                    <Route path='/item/:id' element={ <ItemDetailContainer />}/>
+                    <Route path='/cart' element={ <Cart />}/>
+                    <Route path='/checkout' element={ <Checkout />}/>
+                    <Route path='/*' element={ <NotFound /> }/>
+                  </Routes>
+                </ScrollToTop>
               </Container>
               <Footer />
 

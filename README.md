@@ -97,3 +97,8 @@ Luego de ingresar una order correctamente, el stock del producto se actualiza au
 La aplicación se inicia por defecto en modo oscuro por preferencia personal, pero es posible alternar entre ambos modos desde el botón ubicado en el NavBar en la versión de escritorio, o en el Drawer en la versión mobile.
 
 Si bien no fue implementado, podría incorporarse en el futuro la posibilidad de detectar la preferencia del usuario mediante la media query `prefers-color-scheme` (MUI provee un hook para accederla fácilmente) y en caso de que el usuario cambie a algún modo en particular persistir esta configuración en LocalStorage.
+
+### Componente ScrollToTop
+En las últimas versiones de React Router Dom ya no se restaura el scroll automáticamente al navegar entre rutas, por lo que si por ejemplo estamos observando el listado de productos y recorremos la página hacia la parte inferior, al navegar a otra página quedaremos posicionados también en la parte inferior.
+
+Para resolver este comportamiento se implementó el componente `src/components/ScrollToTop.jsx` el cual mediante el hook `useLocation` de React Router detecta la navegación entre rutas y restaura el scroll a la parte superior de la página. 
