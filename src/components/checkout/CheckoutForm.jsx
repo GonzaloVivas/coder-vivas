@@ -112,6 +112,7 @@ export default function CheckoutForm({ cart, totalAmountInCart, saveOrder, isLoa
           name='phone'
           label='Teléfono'
           variant='outlined'
+          type='tel'
           sx={{ marginBottom: '20px' }}
           InputProps={{
             startAdornment: (
