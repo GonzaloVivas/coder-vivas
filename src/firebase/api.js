@@ -1,17 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDQSU1T3Hxab7nS-BIZ9B07p5khvV3R9uo",
-  authDomain: "react-coder-vivas.firebaseapp.com",
-  projectId: "react-coder-vivas",
-  storageBucket: "react-coder-vivas.appspot.com",
-  messagingSenderId: "17491888944",
-  appId: "1:17491888944:web:312bb35e54300558d3d6f5"
-};
-
-initializeApp(firebaseConfig);
-const db = getFirestore();
+import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { db } from './init';
 
 export const getCategories = async() => {
 
